@@ -1,5 +1,6 @@
 package com.vlad9pa.tasktest.Service;
 
+import com.vlad9pa.tasktest.Entity.Contact;
 import com.vlad9pa.tasktest.Entity.Roles;
 import com.vlad9pa.tasktest.Entity.User;
 import com.vlad9pa.tasktest.Repository.UserRepository;
@@ -11,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.sun.jmx.snmp.SnmpStatusException.readOnly;
-
 @Transactional
 @Service
 public class UserServiceImpl implements UserService{
@@ -23,12 +22,19 @@ public class UserServiceImpl implements UserService{
     @Transactional(readOnly = true)
     @Override
     public User findUserByUsername(String username) {
-        return userRepository.findUserbyUsername(username);
+        return userRepository.findUserByUsername(username);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.getOne(id);
     }
 
     @Override
     public void save(User user) {
         Set<Roles> roles = new HashSet<Roles>();
+        roles.add(Roles.ROLE_USER);
         user.setRoles(roles);
         userRepository.save(user);
     }
@@ -40,6 +46,14 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void addToPhoneBook(User user, Contact contact) {
+        Set<Contact> contacts = new HashSet<>();
+        contacts.add(contact);
+        user.setContacts(contacts);
         userRepository.save(user);
     }
 }

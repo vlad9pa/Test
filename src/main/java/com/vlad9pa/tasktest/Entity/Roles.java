@@ -1,4 +1,8 @@
 package com.vlad9pa.tasktest.Entity;
 
-public enum Roles {
+import java.io.Serializable;
+
+public enum Roles implements Serializable {
+    ROLE_USER,
+    ROLE_ADMIN
 }

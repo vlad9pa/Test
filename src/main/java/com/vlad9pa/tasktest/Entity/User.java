@@ -1,5 +1,8 @@
 package com.vlad9pa.tasktest.Entity;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.data.web.JsonPath;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -12,8 +15,8 @@ public class User {
     @Column(name = "id")
     private Long Id;
     @Basic
-    @Column(name = "login")
-    private String login;
+    @Column(name = "username")
+    private String username;
     @Basic
     @Column(name = "password")
     private String password;
@@ -22,9 +25,9 @@ public class User {
     private String fullName;
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<Roles> roles;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "phone_book", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id"))
     private Set<Contact> contacts;
@@ -37,12 +40,12 @@ public class User {
         Id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -68,4 +71,14 @@ public class User {
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
+
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+
 }
