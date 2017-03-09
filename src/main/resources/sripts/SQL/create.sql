@@ -19,6 +19,7 @@ CREATE TABLE user_roles(
 	user_id BIGINT,
 	roles VARCHAR(100),
 	FOREIGN KEY (user_id) REFERENCES users(id)
+	ON DELETE CASCADE
 );
 CREATE TABLE phone_book(
 	user_id BIGINT NOT NULL,

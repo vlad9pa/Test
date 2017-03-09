@@ -44,7 +44,9 @@ public class Contact {
     @Basic
     @Column(name = "home_phone_number")
     private String homePhoneNumber;
-    @ManyToMany(mappedBy = "contacts")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "phone_book", inverseJoinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "contact_id"))
     private Set<User> users;
 
     public Long getId() {

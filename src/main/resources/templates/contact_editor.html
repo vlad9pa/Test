@@ -34,7 +34,7 @@
         </tr>
     </table>
 </form>
-<form>
+<form th:method="delete" th:action="@{/user/phonebook/edit/}+${contact.id}">
     <input type="submit" value="delete"/>
 </form>
 </body>

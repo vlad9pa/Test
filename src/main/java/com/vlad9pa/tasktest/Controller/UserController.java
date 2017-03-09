@@ -64,9 +64,9 @@ public class UserController {
     private String addContactToBook(@ModelAttribute(name = "contact") @Valid Contact contact,
                                     BindingResult bindingResult,
                                     Model model){
-        if(bindingResult.hasErrors()){
+        /*if(bindingResult.hasErrors()){
             return "contact_creator";
-        }
+        }*/
         User user = userService.findByUsername(securityService.findLoggedInUsername());
         contactService.save(user,contact);
         return "redirect:/user/phonebook";
@@ -92,9 +92,9 @@ public class UserController {
         return "redirect:/user/phonebook";
     }
 
-    @RequestMapping(value = "/phonebook/edit", method = RequestMethod.DELETE)
-    private String deleteContact(@ModelAttribute(name = "contact") Contact contact){
-        contactService.delete(contact);
+    @RequestMapping(value = "/phonebook/edit/{id}", method = RequestMethod.DELETE)
+    private String deleteContact(@PathVariable(name = "id") Long id){
+        contactService.delete(contactService.findById(id));
         return "phone_book";
     }
 }

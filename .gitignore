@@ -1,7 +1,7 @@
 .idea/*
 *.class
 target/*
-
+transaction-log/*
 /.war
 /.ear
 /.jar
