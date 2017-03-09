@@ -3,6 +3,9 @@
     <title>Phone Book</title>
 </head>
 <body>
+<form method="GET" action="/logout">
+    <input type="submit" value="Log Out">
+</form>
 <form method="post" id="contact" action="/user/phonebook">
     <table>
         <tr>

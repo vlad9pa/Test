@@ -5,6 +5,7 @@ import com.vlad9pa.tasktest.Entity.Roles;
 import com.vlad9pa.tasktest.Entity.User;
 import com.vlad9pa.tasktest.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional(readOnly = true)
     @Override
@@ -33,6 +37,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Set<Roles> roles = new HashSet<Roles>();
         roles.add(Roles.ROLE_USER);
         user.setRoles(roles);
@@ -51,7 +56,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void addToPhoneBook(User user, Contact contact) {
-        Set<Contact> contacts = new HashSet<>();
+        Set<Contact> contacts;
+        if(user.getContacts() != null){
+            contacts = user.getContacts();
+        }
+        else{
+            contacts = new HashSet<>();
+        }
         contacts.add(contact);
         user.setContacts(contacts);
         userRepository.save(user);

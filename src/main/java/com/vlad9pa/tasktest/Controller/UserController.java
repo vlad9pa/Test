@@ -3,6 +3,7 @@ package com.vlad9pa.tasktest.Controller;
 import com.vlad9pa.tasktest.Entity.Contact;
 import com.vlad9pa.tasktest.Entity.Roles;
 import com.vlad9pa.tasktest.Entity.User;
+import com.vlad9pa.tasktest.Service.SecurityService;
 import com.vlad9pa.tasktest.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +20,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/{username}")
+    @Autowired
+    private SecurityService securityService;
+
+    @RequestMapping(value = "/profile/{username}")
     private @ResponseBody User getUser(@PathVariable(name = "username" )String username){
         return userService.findUserByUsername(username);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    private String login(){
+    private String login(@RequestParam(value = "logout", required = false) String logout,
+                         @RequestParam(value = "error", required = false) String error){
         return "login";
     }
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -45,6 +50,7 @@ public class UserController {
     }
     @RequestMapping(value = "/phonebook", method = RequestMethod.POST)
     private String phoneBook(@ModelAttribute(name = "contact") Contact contact){
+        userService.addToPhoneBook(userService.findUserByUsername("123"),contact);
         return "phoneBook";
     }
     @RequestMapping(value = "/phonebook", method = RequestMethod.PUT)
