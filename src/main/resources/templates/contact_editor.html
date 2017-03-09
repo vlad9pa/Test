@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Contact</title>
+</head>
+<body>
+<form th:method="put" id="contact" th:action="@{/user/phonebook/edit/}+${contact.id}">
+    <table>
+        <tr>
+            <td class = "label">FirstName:</td>
+            <td><input type = "text" name = "firstName" /></td>
+        </tr>
+        <tr>
+            <td class = "label">LastName:</td>
+            <td><input type = "text" name = "lastName" /></td>
+        </tr>
+        <tr>
+            <td class = "label">SecondName:</td>
+            <td><input type = "text" name = "secondName" /></td>
+        </tr>
+        <tr>
+            <td class = "label">Email:</td>
+            <td><input type = "email" name = "email" /></td>
+        </tr>
+        <tr>
+            <td class="label">Mobile Number:</td>
+            <td><input type="text" name="mobileNumber" /></td>
+        </tr>
+        <tr>
+            <td class="label">Home Phone Number:</td>
+            <td><input type="text" name="homePhoneNumber" /></td>
+        </tr>
+        <tr>
+            <td colspan = "2"><input type = "submit" value = "Save Contact" /></td>
+        </tr>
+    </table>
+</form>
+<form>
+    <input type="submit" value="delete"/>
+</form>
+</body>
+</html>

@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 
     @Transactional(readOnly = true)
     @Override
-    public User findUserByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void addToPhoneBook(User user, Contact contact) {
+    public void addContactToPhoneBook(User user, Contact contact) {
         Set<Contact> contacts;
         if(user.getContacts() != null){
             contacts = user.getContacts();

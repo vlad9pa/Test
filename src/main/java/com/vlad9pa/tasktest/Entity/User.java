@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.web.JsonPath;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -17,12 +19,18 @@ public class User {
     private Long Id;
     @Basic
     @Column(name = "username")
+    @NotNull
+    @Size(min = 3)
     private String username;
     @Basic
     @Column(name = "password")
+    @NotNull
+    @Size(min = 5)
     private String password;
     @Basic
     @Column(name = "fullname")
+    @NotNull
+    @Size(min = 5)
     private String fullName;
     @JsonIgnore
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)

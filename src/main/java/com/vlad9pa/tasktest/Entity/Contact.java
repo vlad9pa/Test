@@ -1,6 +1,12 @@
 package com.vlad9pa.tasktest.Entity;
 
+import org.hibernate.validator.constraints.Email;
+import org.junit.validator.ValidateWith;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -12,18 +18,28 @@ public class Contact {
     private Long id;
     @Basic
     @Column(name = "first_name")
+    @NotNull
+    @Size(min = 4, message = "Minimum 4 symbols")
     private String firstName;
     @Basic
     @Column(name = "last_name")
+    @NotNull
+    @Size(min = 4, message = "Minimum 4 symbols")
     private String lastName;
     @Basic
     @Column(name = "second_name")
+    @NotNull
+    @Size(min = 4, message = "Minimum 4 symbols")
     private String secondName;
     @Basic
     @Column(name = "email")
+    @Email
     private String email;
     @Basic
     @Column(name = "mobile_number")
+    @NotNull
+    @Size(max = 13, min = 12, message = "Wrong Mobile Number Format")
+    @Pattern(regexp = "\\(?([3,8,0]{3})\\)?([0-9]{9})")
     private String mobileNumber;
     @Basic
     @Column(name = "home_phone_number")
@@ -93,5 +109,18 @@ public class Contact {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                '}';
     }
 }

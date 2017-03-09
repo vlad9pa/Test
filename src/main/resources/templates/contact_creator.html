@@ -1,12 +1,9 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Phone Book</title>
+    <title>Add Contact</title>
 </head>
 <body>
-<form method="GET" action="/logout">
-    <input type="submit" value="Log Out">
-</form>
-<form method="post" id="contact" action="/user/phonebook">
+<form method="post" id="contact" action="/user/phonebook/add">
     <table>
         <tr>
             <td class = "label">FirstName:</td>
@@ -21,19 +18,19 @@
             <td><input type = "text" name = "secondName" /></td>
         </tr>
         <tr>
-            <td class = "label">Password:</td>
-            <td><input type = "text" name = "email" /></td>
+            <td class = "label">Email:</td>
+            <td><input type = "email" name = "email" /></td>
         </tr>
         <tr>
-            <td class="label">FullName:</td>
-            <td><input type="text" name="mobileNumber"></td>
+            <td class="label">Mobile Number:</td>
+            <td><input type="text" name="mobileNumber" /></td>
         </tr>
         <tr>
-            <td class="label">FullName:</td>
-            <td><input type="text" name="homePhoneNumber"></td>
+            <td class="label">Home Phone Number:</td>
+            <td><input type="text" name="homePhoneNumber" /></td>
         </tr>
         <tr>
-            <td colspan = "2"><input type = "submit" value = "Create Account" /></td>
+            <td colspan = "2"><input type = "submit" value = "Save Contact" /></td>
         </tr>
     </table>
 </form>
