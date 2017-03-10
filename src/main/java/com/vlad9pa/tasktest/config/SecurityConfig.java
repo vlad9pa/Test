@@ -1,4 +1,4 @@
-package com.vlad9pa.tasktest.Config;
+package com.vlad9pa.tasktest.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -24,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .authorizeRequests()
                     .antMatchers("/user/registration").anonymous()
-                    .antMatchers("/user/profile/**").hasRole("USER")
+                    .antMatchers("/user/profile/**").fullyAuthenticated()
                     .antMatchers("/index","/").anonymous()
                     .anyRequest().authenticated()
                     .and()

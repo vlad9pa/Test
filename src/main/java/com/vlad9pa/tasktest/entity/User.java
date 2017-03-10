@@ -1,8 +1,6 @@
-package com.vlad9pa.tasktest.Entity;
+package com.vlad9pa.tasktest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.web.JsonPath;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,9 +36,7 @@ public class User {
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private Set<Roles> roles;
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "phone_book", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "contact_id"))
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Contact> contacts;
 
     public Long getId() {
@@ -91,5 +87,14 @@ public class User {
         this.contacts = contacts;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "Id=" + Id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

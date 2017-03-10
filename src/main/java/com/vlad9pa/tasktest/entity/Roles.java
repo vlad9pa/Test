@@ -1,4 +1,4 @@
-package com.vlad9pa.tasktest.Entity;
+package com.vlad9pa.tasktest.entity;
 
 import java.io.Serializable;
 

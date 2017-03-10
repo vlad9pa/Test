@@ -1,4 +1,4 @@
-package com.vlad9pa.tasktest.Service;
+package com.vlad9pa.tasktest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

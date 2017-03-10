@@ -1,7 +1,7 @@
-package com.vlad9pa.tasktest.Service;
+package com.vlad9pa.tasktest.service;
 
-import com.vlad9pa.tasktest.Entity.Contact;
-import com.vlad9pa.tasktest.Entity.User;
+import com.vlad9pa.tasktest.entity.Contact;
+import com.vlad9pa.tasktest.entity.User;
 
 public interface UserService {
     User findByUsername(String username);

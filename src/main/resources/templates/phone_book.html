@@ -32,8 +32,8 @@
             <form method="get" th:action="@{/user/phonebook/edit/}+${contact.id}">
                 <td th:text="${contact.firstName}">First Name</td>
                 <td th:text="${contact.lastName}">Last Name</td>
-                <td th:text="${contact.email}">Email</td>
                 <td th:text="${contact.secondName}">Second Name</td>
+                <td th:text="${contact.email}">Email</td>
                 <td th:text="${contact.mobileNumber}">Mobile Number</td>
                 <td th:text="${contact.homePhoneNumber}">Home Phone Number</td>
                 <td><input type="submit" value="Edit" /></td>

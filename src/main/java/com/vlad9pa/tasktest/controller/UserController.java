@@ -1,10 +1,10 @@
-package com.vlad9pa.tasktest.Controller;
+package com.vlad9pa.tasktest.controller;
 
-import com.vlad9pa.tasktest.Entity.Contact;
-import com.vlad9pa.tasktest.Entity.User;
-import com.vlad9pa.tasktest.Service.ContactService;
-import com.vlad9pa.tasktest.Service.SecurityService;
-import com.vlad9pa.tasktest.Service.UserService;
+import com.vlad9pa.tasktest.entity.Contact;
+import com.vlad9pa.tasktest.entity.User;
+import com.vlad9pa.tasktest.service.ContactService;
+import com.vlad9pa.tasktest.service.SecurityService;
+import com.vlad9pa.tasktest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -50,7 +51,8 @@ public class UserController {
     @RequestMapping(value = "/phonebook", method = RequestMethod.GET)
     private String phoneBook(Model model){
         User user = userService.findByUsername(securityService.findLoggedInUsername());
-        model.addAttribute("contacts",user.getContacts());
+        List<Contact> contactList = contactService.getSortedList(user.getContacts());
+        model.addAttribute("contacts",contactList);
         return "phone_book";
     }
 
@@ -76,8 +78,10 @@ public class UserController {
     private String editContact(@PathVariable(name = "id") Long id,
                                Model model){
         model.addAttribute("contact", contactService.findById(id));
+        System.out.println(contactService.findById(id).toString());
         return "contact_editor";
     }
+
     @RequestMapping(value = "/phonebook/edit/{id}", method = RequestMethod.PUT)
     private String updateContact(@PathVariable(name = "id") Long id,
                                  @ModelAttribute(name = "contact") @Valid Contact contact,
@@ -86,15 +90,13 @@ public class UserController {
         /*if(bindingResult.hasErrors()){
             return "contact_editor";
         }*/
-        contact.setId(id);
-        System.out.println(contact.toString());
-        contactService.update(contact);
+        contactService.update(contact, id);
         return "redirect:/user/phonebook";
     }
 
     @RequestMapping(value = "/phonebook/edit/{id}", method = RequestMethod.DELETE)
     private String deleteContact(@PathVariable(name = "id") Long id){
         contactService.delete(contactService.findById(id));
-        return "phone_book";
+        return "redirect:/user/phonebook";
     }
 }

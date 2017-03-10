@@ -1,7 +1,6 @@
-package com.vlad9pa.tasktest.Entity;
+package com.vlad9pa.tasktest.entity;
 
 import org.hibernate.validator.constraints.Email;
-import org.junit.validator.ValidateWith;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,13 +10,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "contacts")
-public class Contact {
+public class Contact{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Basic
     @Column(name = "first_name")
+    @OrderColumn(name = "first_name")
     @NotNull
     @Size(min = 4, message = "Minimum 4 symbols")
     private String firstName;
@@ -39,15 +39,14 @@ public class Contact {
     @Column(name = "mobile_number")
     @NotNull
     @Size(max = 13, min = 12, message = "Wrong Mobile Number Format")
-    @Pattern(regexp = "\\(?([3,8,0]{3})\\)?([0-9]{9})")
+    @Pattern(regexp = "\\(?([3]{1})\\)?([8]{1}){1}?([0]{1}){1}?([0-9]{9})")
     private String mobileNumber;
     @Basic
     @Column(name = "home_phone_number")
     private String homePhoneNumber;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "phone_book", inverseJoinColumns = @JoinColumn(name = "user_id"),
-            joinColumns = @JoinColumn(name = "contact_id"))
-    private Set<User> users;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Long getId() {
         return id;
@@ -105,12 +104,12 @@ public class Contact {
         this.homePhoneNumber = homePhoneNumber;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -123,6 +122,7 @@ public class Contact {
                 ", email='" + email + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", homePhoneNumber='" + homePhoneNumber + '\'' +
+                ", user=" + user.toString() +
                 '}';
     }
 }

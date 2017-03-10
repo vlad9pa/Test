@@ -1,4 +1,4 @@
-package com.vlad9pa.tasktest.Service;
+package com.vlad9pa.tasktest.service;
 
 public interface SecurityService {
     String findLoggedInUsername();

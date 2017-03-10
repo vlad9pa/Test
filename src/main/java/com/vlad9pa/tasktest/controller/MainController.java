@@ -1,4 +1,4 @@
-package com.vlad9pa.tasktest.Controller;
+package com.vlad9pa.tasktest.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

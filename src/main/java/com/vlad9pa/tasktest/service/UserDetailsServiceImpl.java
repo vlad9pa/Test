@@ -1,7 +1,7 @@
-package com.vlad9pa.tasktest.Service;
+package com.vlad9pa.tasktest.service;
 
-import com.vlad9pa.tasktest.Entity.Roles;
-import com.vlad9pa.tasktest.Entity.User;
+import com.vlad9pa.tasktest.entity.Roles;
+import com.vlad9pa.tasktest.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

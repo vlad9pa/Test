@@ -1,9 +1,9 @@
-package com.vlad9pa.tasktest.Service;
+package com.vlad9pa.tasktest.service;
 
-import com.vlad9pa.tasktest.Entity.Contact;
-import com.vlad9pa.tasktest.Entity.Roles;
-import com.vlad9pa.tasktest.Entity.User;
-import com.vlad9pa.tasktest.Repository.UserRepository;
+import com.vlad9pa.tasktest.entity.Contact;
+import com.vlad9pa.tasktest.entity.Roles;
+import com.vlad9pa.tasktest.entity.User;
+import com.vlad9pa.tasktest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
