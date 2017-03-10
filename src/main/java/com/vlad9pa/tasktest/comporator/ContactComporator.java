@@ -10,7 +10,7 @@ public class ContactComporator implements Comparator<Contact> {
 
     public enum Order{fName, lName, mNumber}
 
-    private Order sortingBy;
+    private Order sortingBy = Order.fName;
 
     public void setSortingBy(Order sortingBy){
         this.sortingBy = sortingBy;

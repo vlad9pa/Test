@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -78,7 +79,6 @@ public class UserController {
     private String editContact(@PathVariable(name = "id") Long id,
                                Model model){
         model.addAttribute("contact", contactService.findById(id));
-        System.out.println(contactService.findById(id).toString());
         return "contact_editor";
     }
 
@@ -98,5 +98,13 @@ public class UserController {
     private String deleteContact(@PathVariable(name = "id") Long id){
         contactService.delete(contactService.findById(id));
         return "redirect:/user/phonebook";
+    }
+
+    @RequestMapping(value = "/phonebook/sort", method = RequestMethod.POST)
+    private String sortBy(@RequestParam(name = "sortBy") String sortBy, Model model){
+        User user = userService.findByUsername(securityService.findLoggedInUsername());
+        List<Contact> contactList = contactService.getSortedList(user.getContacts(),sortBy);
+        model.addAttribute("contacts",contactList);
+        return "phone_book";
     }
 }

@@ -13,4 +13,5 @@ public interface ContactService {
     void delete(Contact contact);
     Contact findById(Long id);
     List<Contact> getSortedList(Set<Contact> contacts);
+    List<Contact> getSortedList(Set<Contact> contacts, String sortBy);
 }

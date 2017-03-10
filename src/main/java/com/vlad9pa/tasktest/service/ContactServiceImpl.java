@@ -20,6 +20,8 @@ public class ContactServiceImpl implements ContactService{
     @Autowired
     private ContactRepository contactRepository;
 
+    private List<Contact> contactList;
+
     @Override
     public void save(User user,Contact contact) {
        contact.setUser(user);
@@ -52,7 +54,21 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public List<Contact> getSortedList(Set<Contact> contacts) {
-        contactComporator.setSortingBy(ContactComporator.Order.lName);
+        contactComporator.setSortingBy(ContactComporator.Order.fName);
+        List<Contact> contactList = new ArrayList<>(contacts);
+        Collections.sort(contactList, contactComporator);
+        return contactList;
+    }
+
+    @Override
+    public List<Contact> getSortedList(Set<Contact> contacts, String sortBy) {
+        switch (sortBy){
+            case "fName":contactComporator.setSortingBy(ContactComporator.Order.fName);break;
+            case "lName":contactComporator.setSortingBy(ContactComporator.Order.lName);break;
+            case "mNumber":contactComporator.setSortingBy(ContactComporator.Order.mNumber);break;
+            default:contactComporator.setSortingBy(ContactComporator.Order.mNumber); break;
+        }
+
         List<Contact> contactList = new ArrayList<>(contacts);
         Collections.sort(contactList, contactComporator);
         return contactList;

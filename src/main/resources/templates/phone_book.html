@@ -48,5 +48,9 @@
     <form method="GET" action="/user/logout">
         <input type="submit" value="Log Out" />
     </form>
+    <form th:method="post" th:action="@{/user/phonebook/sort}">
+        <input type="text" name="sortBy" />
+        <input type="submit" value="sortByLName" />
+    </form>
 </body>
 </html>
