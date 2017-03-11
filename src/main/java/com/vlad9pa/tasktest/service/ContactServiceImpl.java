@@ -20,14 +20,15 @@ public class ContactServiceImpl implements ContactService{
     @Autowired
     private ContactRepository contactRepository;
 
-    private List<Contact> contactList;
-
+    // Save method take user entity for knowing to which user entity must be linked contact entity
     @Override
     public void save(User user,Contact contact) {
        contact.setUser(user);
        contactRepository.save(contact);
     }
 
+    // In case that when editing when editing contact in web contact entity create new Contact-object,
+    // update method take id by which it's find contact entity that must be edited.
     @Override
     public void update(Contact newContact, Long id) {
         Contact oldContact = contactRepository.findOne(id);
@@ -45,10 +46,22 @@ public class ContactServiceImpl implements ContactService{
         contactRepository.delete(contact);
     }
 
+    @Override
+    public void deleteAll() {
+        contactRepository.deleteAll();
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Contact findById(Long id) {
         Contact contact = contactRepository.getOne(id);
+        return contact;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Contact findByFirstName(String firstName) {
+        Contact contact = contactRepository.findByFirstName(firstName);
         return contact;
     }
 
@@ -66,9 +79,8 @@ public class ContactServiceImpl implements ContactService{
             case "fName":contactComporator.setSortingBy(ContactComporator.Order.fName);break;
             case "lName":contactComporator.setSortingBy(ContactComporator.Order.lName);break;
             case "mNumber":contactComporator.setSortingBy(ContactComporator.Order.mNumber);break;
-            default:contactComporator.setSortingBy(ContactComporator.Order.mNumber); break;
+            default:contactComporator.setSortingBy(ContactComporator.Order.fName); break;
         }
-
         List<Contact> contactList = new ArrayList<>(contacts);
         Collections.sort(contactList, contactComporator);
         return contactList;

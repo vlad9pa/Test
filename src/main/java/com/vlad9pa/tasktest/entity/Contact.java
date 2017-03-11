@@ -113,16 +113,28 @@ public class Contact{
     }
 
     @Override
-    public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", email='" + email + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", homePhoneNumber='" + homePhoneNumber + '\'' +
-                ", user=" + user.toString() +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Contact contact = (Contact) o;
+
+        if (!firstName.equals(contact.firstName)) return false;
+        if (!lastName.equals(contact.lastName)) return false;
+        if (!secondName.equals(contact.secondName)) return false;
+        if (!email.equals(contact.email)) return false;
+        if (!mobileNumber.equals(contact.mobileNumber)) return false;
+        return homePhoneNumber.equals(contact.homePhoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + secondName.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + mobileNumber.hashCode();
+        result = 31 * result + homePhoneNumber.hashCode();
+        return result;
     }
 }

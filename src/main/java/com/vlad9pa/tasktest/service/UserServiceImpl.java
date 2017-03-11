@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserService{
     @Transactional(readOnly = true)
     @Override
     public User findByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public User findUserById(Long id) {
+    public User findById(Long id) {
         return userRepository.getOne(id);
     }
 
@@ -53,6 +53,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteAll() {
+        userRepository.deleteAll();
+    }
+
+    @Override
+    public void changePassword(User user, String password) {
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         userRepository.save(user);
     }
 

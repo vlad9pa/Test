@@ -20,7 +20,6 @@ public class User {
     @NotNull
     @Size(min = 3)
     private String username;
-    @Basic
     @Column(name = "password")
     @NotNull
     @Size(min = 5)
@@ -87,14 +86,27 @@ public class User {
         this.contacts = contacts;
     }
 
+
     @Override
-    public String toString() {
-        return "User{" +
-                "Id=" + Id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", roles=" + roles +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (Id != null ? !Id.equals(user.Id) : user.Id != null) return false;
+        if (!username.equals(user.username)) return false;
+        if (!password.equals(user.password)) return false;
+        return fullName.equals(user.fullName);
     }
+
+    @Override
+    public int hashCode() {
+        int result = Id != null ? Id.hashCode() : 0;
+        result = 31 * result + username.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + fullName.hashCode();
+        return result;
+    }
+
 }

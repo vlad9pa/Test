@@ -67,9 +67,9 @@ public class UserController {
     private String addContactToBook(@ModelAttribute(name = "contact") @Valid Contact contact,
                                     BindingResult bindingResult,
                                     Model model){
-        /*if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()){
             return "contact_creator";
-        }*/
+        }
         User user = userService.findByUsername(securityService.findLoggedInUsername());
         contactService.save(user,contact);
         return "redirect:/user/phonebook";
@@ -87,9 +87,9 @@ public class UserController {
                                  @ModelAttribute(name = "contact") @Valid Contact contact,
                                  BindingResult bindingResult,
                                  Model model){
-        /*if(bindingResult.hasErrors()){
+        if(bindingResult.hasErrors()){
             return "contact_editor";
-        }*/
+        }
         contactService.update(contact, id);
         return "redirect:/user/phonebook";
     }
