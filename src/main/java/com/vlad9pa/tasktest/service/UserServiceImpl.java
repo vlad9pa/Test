@@ -5,6 +5,7 @@ import com.vlad9pa.tasktest.entity.Roles;
 import com.vlad9pa.tasktest.entity.User;
 import com.vlad9pa.tasktest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 @Transactional
 @Service
+@Profile("MySQL")
 public class UserServiceImpl implements UserService{
 
     @Autowired
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService{
     @Transactional(readOnly = true)
     @Override
     public User findById(Long id) {
-        return userRepository.getOne(id);
+        return userRepository.findOne(id);
     }
 
     @Override

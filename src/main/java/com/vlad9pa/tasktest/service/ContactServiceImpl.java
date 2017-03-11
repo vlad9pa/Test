@@ -5,6 +5,7 @@ import com.vlad9pa.tasktest.entity.Contact;
 import com.vlad9pa.tasktest.entity.User;
 import com.vlad9pa.tasktest.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import java.util.*;
 
 @Transactional
 @Service
+@Profile("MySQL")
 public class ContactServiceImpl implements ContactService{
 
     @Autowired
@@ -54,7 +56,7 @@ public class ContactServiceImpl implements ContactService{
     @Transactional(readOnly = true)
     @Override
     public Contact findById(Long id) {
-        Contact contact = contactRepository.getOne(id);
+        Contact contact = contactRepository.findOne(id);
         return contact;
     }
 

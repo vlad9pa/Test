@@ -1,6 +1,7 @@
 package com.vlad9pa.tasktest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.context.annotation.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
+@Profile("MySQL")
 public class User {
 
     @Id

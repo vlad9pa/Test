@@ -1,15 +1,18 @@
 package com.vlad9pa.tasktest.entity;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.context.annotation.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "contacts")
+@Profile("MySQL")
 public class Contact{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
