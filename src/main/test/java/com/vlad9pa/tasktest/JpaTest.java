@@ -73,7 +73,7 @@ public class JpaTest {
         Contact contact = new Contact();
         contact.setFirstName("firstName");
         contact.setLastName("lastName");
-        contact.setSecondName("secondName");
+        contact.setMiddleName("secondName");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");
@@ -92,7 +92,7 @@ public class JpaTest {
         Contact contact = new Contact();
         contact.setFirstName("firstName");
         contact.setLastName("lastName");
-        contact.setSecondName("secondName");
+        contact.setMiddleName("secondName");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");
@@ -108,7 +108,7 @@ public class JpaTest {
         Contact contact = new Contact();
         contact.setFirstName("firstName");
         contact.setLastName("lastName");
-        contact.setSecondName("secondName");
+        contact.setMiddleName("secondName");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");

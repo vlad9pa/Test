@@ -5,6 +5,7 @@ import com.vlad9pa.tasktest.entity.User;
 import com.vlad9pa.tasktest.service.ContactService;
 import com.vlad9pa.tasktest.service.SecurityService;
 import com.vlad9pa.tasktest.service.UserService;
+import com.vlad9pa.tasktest.validator.UsernameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -28,6 +28,9 @@ public class UserController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private UsernameValidator usernameValidator;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     private String login(@RequestParam(value = "logout", required = false) String logout,
                          @RequestParam(value = "error", required = false) String error){
@@ -42,6 +45,7 @@ public class UserController {
     private String registration(@ModelAttribute(name = "user") @Valid User user,
                                 BindingResult bindingResult,
                                 Model model){
+        usernameValidator.validate(user,bindingResult);
         if(bindingResult.hasErrors()){
             return "registration";
         }
@@ -53,6 +57,14 @@ public class UserController {
     private String phoneBook(Model model){
         User user = userService.findByUsername(securityService.findLoggedInUsername());
         List<Contact> contactList = contactService.getSortedList(user.getContacts());
+        model.addAttribute("contacts",contactList);
+        return "phone_book";
+    }
+
+    @RequestMapping(value = "/phonebook", method = RequestMethod.POST)
+    private String sortBy(@RequestParam(name = "sortBy") String sortBy, Model model){
+        User user = userService.findByUsername(securityService.findLoggedInUsername());
+        List<Contact> contactList = contactService.getSortedList(user.getContacts(),sortBy);
         model.addAttribute("contacts",contactList);
         return "phone_book";
     }
@@ -88,6 +100,7 @@ public class UserController {
                                  BindingResult bindingResult,
                                  Model model){
         if(bindingResult.hasErrors()){
+            model.addAttribute("errors",bindingResult);
             return "contact_editor";
         }
         contactService.update(contact, id);
@@ -100,11 +113,4 @@ public class UserController {
         return "redirect:/user/phonebook";
     }
 
-    @RequestMapping(value = "/phonebook/sort", method = RequestMethod.POST)
-    private String sortBy(@RequestParam(name = "sortBy") String sortBy, Model model){
-        User user = userService.findByUsername(securityService.findLoggedInUsername());
-        List<Contact> contactList = contactService.getSortedList(user.getContacts(),sortBy);
-        model.addAttribute("contacts",contactList);
-        return "phone_book";
-    }
 }

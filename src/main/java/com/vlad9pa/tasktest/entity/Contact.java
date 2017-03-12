@@ -2,17 +2,15 @@ package com.vlad9pa.tasktest.entity;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.context.annotation.Profile;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "contacts")
-@Profile("MySQL")
 public class Contact{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,29 +18,35 @@ public class Contact{
     private Long id;
     @Basic
     @Column(name = "first_name")
-    @OrderColumn(name = "first_name")
-    @NotNull
-    @Size(min = 4, message = "Minimum 4 symbols")
+    @NotNull(message = "This field is required.")
+    @Size(min = 4, message = "First name must be over 4 characters.")
+    @Pattern(regexp = "^(?=.{4,32}$)(?![_.])(?!.*[_.]{2})[a-zA-Z._]+(?<![_.])$",
+            message = "Must contain only characters.")
     private String firstName;
     @Basic
     @Column(name = "last_name")
-    @NotNull
-    @Size(min = 4, message = "Minimum 4 symbols")
+    @NotNull(message = "This field is required.")
+    @Size(min = 4, message = "Last name must be over 4 characters.")
+    @Pattern(regexp = "^(?=.{4,32}$)(?![_.])(?!.*[_.]{2})[a-zA-Z._]+(?<![_.])$",
+            message = "Must contain only characters.")
     private String lastName;
     @Basic
-    @Column(name = "second_name")
-    @NotNull
-    @Size(min = 4, message = "Minimum 4 symbols")
-    private String secondName;
+    @Column(name = "middle_name")
+    @NotNull(message = "This field is required.")
+    @Size(min = 4, message = "Middle name must be over 4 characters.")
+    @Pattern(regexp = "^(?=.{4,32}$)(?![_.])(?!.*[_.]{2})[a-zA-Z._]+(?<![_.])$",
+            message = "Must contain only characters.")
+    private String middleName;
     @Basic
     @Column(name = "email")
+    @NotNull(message = "This field is required.")
     @Email
     private String email;
     @Basic
     @Column(name = "mobile_number")
-    @NotNull
-    @Size(max = 13, min = 12, message = "Wrong Mobile Number Format")
-    @Pattern(regexp = "\\(?([3]{1})\\)?([8]{1}){1}?([0]{1}){1}?([0-9]{9})")
+    @NotNull(message = "This field is required.")
+    @Pattern(regexp = "\\(?([3]{1})\\)?([8]{1}){1}?([0]{1}){1}?([0-9]{9})",
+            message = "Mobile number must begin with 380 and size must be equal 12 symbols.")
     private String mobileNumber;
     @Basic
     @Column(name = "home_phone_number")
@@ -75,12 +79,12 @@ public class Contact{
         this.lastName = lastName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getEmail() {
@@ -124,20 +128,9 @@ public class Contact{
 
         if (!firstName.equals(contact.firstName)) return false;
         if (!lastName.equals(contact.lastName)) return false;
-        if (!secondName.equals(contact.secondName)) return false;
+        if (!middleName.equals(contact.middleName)) return false;
         if (!email.equals(contact.email)) return false;
         if (!mobileNumber.equals(contact.mobileNumber)) return false;
         return homePhoneNumber.equals(contact.homePhoneNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + secondName.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + mobileNumber.hashCode();
-        result = 31 * result + homePhoneNumber.hashCode();
-        return result;
     }
 }

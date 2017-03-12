@@ -1,0 +1,9 @@
+@import url("../css/main.css");
+
+.log-in{
+  font-size: 50px;
+}
+.form  {
+  width: 250px;
+  margin: 200px auto;
+}

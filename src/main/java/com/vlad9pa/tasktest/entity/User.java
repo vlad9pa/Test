@@ -5,31 +5,32 @@ import org.springframework.context.annotation.Profile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Profile("MySQL")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long Id;
     @Basic
     @Column(name = "username")
-    @NotNull
-    @Size(min = 3)
+    @NotNull(message = "Required")
+    @Size(min = 5, message = "Username must be over 5 characters.")
+    @Pattern(regexp = "^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$",
+            message = "Username must contain [a-Z][0-9]")
     private String username;
     @Column(name = "password")
-    @NotNull
-    @Size(min = 5)
+    @NotNull(message = "This field is required.")
+    @Size(min = 5, message = "Password must be over 5 characters.")
     private String password;
     @Basic
     @Column(name = "fullname")
-    @NotNull
-    @Size(min = 5)
+    @NotNull(message = "This field is required.")
+    @Size(min = 5, message = "Full name must be over 5 characters." )
     private String fullName;
     @JsonIgnore
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
@@ -101,14 +102,4 @@ public class User {
         if (!password.equals(user.password)) return false;
         return fullName.equals(user.fullName);
     }
-
-    @Override
-    public int hashCode() {
-        int result = Id != null ? Id.hashCode() : 0;
-        result = 31 * result + username.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + fullName.hashCode();
-        return result;
-    }
-
 }

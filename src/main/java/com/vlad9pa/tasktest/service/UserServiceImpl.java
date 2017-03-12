@@ -16,7 +16,6 @@ import java.util.Set;
 
 @Transactional
 @Service
-@Profile("MySQL")
 public class UserServiceImpl implements UserService{
 
     @Autowired

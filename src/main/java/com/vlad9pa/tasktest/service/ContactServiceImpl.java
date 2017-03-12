@@ -13,7 +13,6 @@ import java.util.*;
 
 @Transactional
 @Service
-@Profile("MySQL")
 public class ContactServiceImpl implements ContactService{
 
     @Autowired
@@ -36,7 +35,7 @@ public class ContactServiceImpl implements ContactService{
         Contact oldContact = contactRepository.findOne(id);
         oldContact.setFirstName(newContact.getFirstName());
         oldContact.setLastName(newContact.getLastName());
-        oldContact.setSecondName(newContact.getSecondName());
+        oldContact.setMiddleName(newContact.getMiddleName());
         oldContact.setEmail(newContact.getEmail());
         oldContact.setMobileNumber(newContact.getMobileNumber());
         oldContact.setHomePhoneNumber(newContact.getHomePhoneNumber());
@@ -78,9 +77,9 @@ public class ContactServiceImpl implements ContactService{
     @Override
     public List<Contact> getSortedList(Set<Contact> contacts, String sortBy) {
         switch (sortBy){
-            case "fName":contactComporator.setSortingBy(ContactComporator.Order.fName);break;
-            case "lName":contactComporator.setSortingBy(ContactComporator.Order.lName);break;
-            case "mNumber":contactComporator.setSortingBy(ContactComporator.Order.mNumber);break;
+            case "Name":contactComporator.setSortingBy(ContactComporator.Order.fName);break;
+            case "Last Name":contactComporator.setSortingBy(ContactComporator.Order.lName);break;
+            case "Mobile Number":contactComporator.setSortingBy(ContactComporator.Order.mNumber);break;
             default:contactComporator.setSortingBy(ContactComporator.Order.fName); break;
         }
         List<Contact> contactList = new ArrayList<>(contacts);

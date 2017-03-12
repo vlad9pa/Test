@@ -1,0 +1,18 @@
+@import url("../css/main.css");
+
+.greetings{
+  font-size: 50px;
+}
+.wrapper{
+  width: 600px;
+  height: 500px;
+  margin: auto;
+}
+.table{
+  margin: 200px auto;
+  width: 500px;
+}
+.select-form{
+  float: right;
+  margin-top: -2px;
+}

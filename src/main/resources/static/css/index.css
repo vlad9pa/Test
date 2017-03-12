@@ -1,0 +1,14 @@
+@import url("../css/main.css");
+.form{
+  width: 300px;
+  height: 500px;
+  margin: 200px auto;
+}
+.button{
+  padding: 5px;
+  margin: 10px auto;
+  width: 300px;
+}
+.greetings{
+  font-size: 50px;
+}

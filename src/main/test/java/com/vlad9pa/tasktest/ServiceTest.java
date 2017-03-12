@@ -50,7 +50,7 @@ public class ServiceTest {
         Contact contact = new Contact();
         contact.setFirstName("firstName");
         contact.setLastName("lastName");
-        contact.setSecondName("secondName");
+        contact.setMiddleName("secondName");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");
@@ -68,7 +68,7 @@ public class ServiceTest {
         Contact contact = new Contact();
         contact.setFirstName("CFirstContact");
         contact.setLastName("FirstContact");
-        contact.setSecondName("FirstContact");
+        contact.setMiddleName("FirstContact");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");
@@ -76,7 +76,7 @@ public class ServiceTest {
         contact = new Contact();
         contact.setFirstName("ASecondContact");
         contact.setLastName("SecondContact");
-        contact.setSecondName("SecondContact");
+        contact.setMiddleName("SecondContact");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");
@@ -84,7 +84,7 @@ public class ServiceTest {
         contact = new Contact();
         contact.setFirstName("AThirdContact");
         contact.setLastName("ThirdContact");
-        contact.setSecondName("ThirdContact");
+        contact.setMiddleName("ThirdContact");
         contact.setEmail("email@email.com");
         contact.setMobileNumber("380982943055");
         contact.setHomePhoneNumber("4554547");
