@@ -12,27 +12,27 @@
                 <div th:object="${contact}" th:remove="tag">
                     <div class="text">Name</div>
                     <input th:field="${contact.firstName}" type="text" name="firstName" />
-                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+                    <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
 
                     <div class="text">Surname</div>
                     <input th:field="${contact.lastName}" type="text" name="lastName" />
-                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First Name Error</span>
+                    <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">First Name Error</span>
 
                     <div class="text">Middle Name</div>
                     <input th:field="${contact.middleName}" type="text" name="middleName" />
-                    <span th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">First Name Error</span>
+                    <span class="error" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">First Name Error</span>
 
                     <div class="text">Email</div>
                     <input th:field="${contact.email}" type="email" name="email" />
-                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First Name Error</span>
+                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">First Name Error</span>
 
                     <div class="text">Mobile Number</div>
                     <input th:field="${contact.mobileNumber}" type="text" name="mobileNumber" />
-                    <span th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}">First Name Error</span>
+                    <span class="error" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}">First Name Error</span>
 
                     <div class="text">Home Number</div>
                     <input th:field="${contact.homePhoneNumber}" type="text" name="homePhoneNumber" />
-                    <span th:if="${#fields.hasErrors('homePhoneNumber')}" th:errors="*{homePhoneNumber}">First Name Error</span>
+                    <span class="error" th:if="${#fields.hasErrors('homePhoneNumber')}" th:errors="*{homePhoneNumber}">First Name Error</span>
 
                     <button>Save Contact</button>
                 </div>
