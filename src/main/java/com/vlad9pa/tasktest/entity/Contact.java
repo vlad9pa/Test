@@ -1,5 +1,6 @@
 package com.vlad9pa.tasktest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.context.annotation.Profile;
 import org.springframework.format.annotation.NumberFormat;
@@ -53,7 +54,10 @@ public class Contact{
     private String homePhoneNumber;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
+
+    private Long userID;
 
     public Long getId() {
         return id;
@@ -117,6 +121,14 @@ public class Contact{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     @Override

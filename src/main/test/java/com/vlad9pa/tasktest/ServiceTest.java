@@ -94,17 +94,4 @@ public class ServiceTest {
         assertNotEquals(contactList.get(0),sortedContactList.get(0));
     }
 
-    @Test
-    public void shouldChangeUserPassword(){
-        User user = new User();
-        user.setUsername("username");
-        user.setPassword("password");
-        user.setFullName("fullName");
-        userService.save(user);
-        String newPassword = "newpassword";
-        String oldPassword = user.getPassword();
-        userService.changePassword(user,newPassword);
-        assertNotEquals(oldPassword,user.getPassword());
-    }
-
 }

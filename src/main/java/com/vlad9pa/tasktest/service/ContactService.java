@@ -12,7 +12,6 @@ public interface ContactService {
     void update(Contact contact, Long id);
     void delete(Contact contact);
     void deleteAll();
-    Contact findByFirstName(String firstName);
     Contact findById(Long id);
     List<Contact> getSortedList(Set<Contact> contacts);
     List<Contact> getSortedList(Set<Contact> contacts, String sortBy);

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+@Profile("sql")
 @Transactional
 @Service
 public class ContactServiceImpl implements ContactService{
@@ -56,13 +57,6 @@ public class ContactServiceImpl implements ContactService{
     @Override
     public Contact findById(Long id) {
         Contact contact = contactRepository.findOne(id);
-        return contact;
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public Contact findByFirstName(String firstName) {
-        Contact contact = contactRepository.findByFirstName(firstName);
         return contact;
     }
 

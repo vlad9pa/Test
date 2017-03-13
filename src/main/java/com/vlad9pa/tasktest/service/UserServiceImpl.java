@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+@Profile("sql")
 @Transactional
 @Service
 public class UserServiceImpl implements UserService{
